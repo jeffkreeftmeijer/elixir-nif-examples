@@ -1,0 +1,2 @@
+defmodule Nif do
+end
