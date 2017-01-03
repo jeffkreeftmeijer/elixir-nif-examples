@@ -9,6 +9,10 @@ defmodule Nif do
     exit(:nif_library_not_loaded)
   end
 
+  def set(_,_) do
+    exit(:nif_library_not_loaded)
+  end
+
   def fetch(_) do
     exit(:nif_library_not_loaded)
   end

@@ -16,7 +16,6 @@ static int load(ErlNifEnv* env, void** priv, ERL_NIF_TERM load_info)
 
 ERL_NIF_TERM create(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
-  unsigned int a;
   ERL_NIF_TERM result;
   Resource* resource;
 
@@ -24,6 +23,30 @@ ERL_NIF_TERM create(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
   result = enif_make_resource(env, resource);
   enif_release_resource(resource);
+
+  return enif_make_tuple2(env, enif_make_atom(env, "ok"), result);
+}
+
+ERL_NIF_TERM set(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+  unsigned int a;
+  ERL_NIF_TERM result;
+  Resource* resource;
+
+  if(!enif_get_resource(env, argv[0], RESOURCE_TYPE, (void**) &resource))
+  {
+    return enif_make_badarg(env);
+  }
+
+  if(!enif_get_uint(env, argv[1], &a))
+  {
+    return enif_make_badarg(env);
+  }
+
+  result = enif_make_resource(env, resource);
+  enif_release_resource(resource);
+
+  resource->value = a;
 
   return enif_make_tuple2(env, enif_make_atom(env, "ok"), result);
 }
@@ -42,6 +65,7 @@ ERL_NIF_TERM fetch(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
 static ErlNifFunc nif_funcs[] = {
   {"create", 0, create},
+  {"set", 2, set},
   {"fetch", 1, fetch}
 };
 
