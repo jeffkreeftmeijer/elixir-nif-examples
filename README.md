@@ -10,14 +10,12 @@ An Elixir library that uses resources to return pointers to native data stucture
 $ iex -S mix
 Erlang/OTP 19 [erts-8.1] [source] [64-bit] [smp:4:4] [async-threads:10] [hipe] [kernel-poll:false] [dtrace]
 Interactive Elixir (1.3.4) - press Ctrl+C to exit (type h() ENTER for help)
-iex(1)> {:ok, fourty_two} = Nif.create(42)
+iex(1)> {:ok, resource} = Nif.create
 {:ok, ""}
-iex(2)> {:ok, fourty_three} = Nif.create(43)
+iex(2)> Nif.fetch(resource)
+0
+iex(3)> {:ok, resource} = Nif.set(resource, 42)
 {:ok, ""}
-iex(3)> fourty_two == "" && fourty_three == "" && fourty_two == fourty_three
-true # ⚠️  Resource terms are represented as empty binaries!
-iex(4)> Nif.fetch(fourty_three)
-43
-iex(5)> Nif.fetch(fourty_two)
+iex(4)> Nif.fetch(resource)
 42
 ```
