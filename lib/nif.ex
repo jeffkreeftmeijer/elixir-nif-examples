@@ -5,7 +5,7 @@ defmodule Nif do
     :ok = :erlang.load_nif('./priv/nif', 0)
   end
 
-  def create(_) do
+  def create do
     exit(:nif_library_not_loaded)
   end
 
