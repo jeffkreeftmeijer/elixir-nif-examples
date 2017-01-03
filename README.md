@@ -1,24 +1,15 @@
-# Nif
+# elixir-nif-examples
 
-**TODO: Add description**
+⚠️  Be sure to check out the other [branches](https://github.com/jeffkreeftmeijer/elixir-nif-example/branches) for more examples.
 
-## Installation
+## A simple NIF
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+An Elixir example that uses a Nif to implement `Nif.sum/2`.
 
-  1. Add `nif` to your list of dependencies in `mix.exs`:
-
-    ```elixir
-    def deps do
-      [{:nif, "~> 0.1.0"}]
-    end
-    ```
-
-  2. Ensure `nif` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:nif]]
-    end
-    ```
-
+```
+$ iex -S mix
+Erlang/OTP 19 [erts-8.1] [source] [64-bit] [smp:4:4] [async-threads:10] [hipe] [kernel-poll:false] [dtrace]
+Interactive Elixir (1.3.4) - press Ctrl+C to exit (type h() ENTER for help)
+iex(1)> Nif.sum(1,2)
+3
+```
