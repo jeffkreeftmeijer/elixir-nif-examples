@@ -8,4 +8,8 @@ defmodule Nif do
   def create(_) do
     exit(:nif_library_not_loaded)
   end
+
+  def fetch(_) do
+    exit(:nif_library_not_loaded)
+  end
 end

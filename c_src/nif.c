@@ -35,8 +35,21 @@ ERL_NIF_TERM create(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
   return enif_make_tuple2(env, enif_make_atom(env, "ok"), result);
 }
 
+ERL_NIF_TERM fetch(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+  Resource* resource;
+
+  if(!enif_get_resource(env, argv[0], RESOURCE_TYPE, (void**) &resource))
+  {
+    return enif_make_badarg(env);
+  }
+
+  return enif_make_int(env, resource->value);
+}
+
 static ErlNifFunc nif_funcs[] = {
-  {"create", 1, create}
+  {"create", 1, create},
+  {"fetch", 1, fetch}
 };
 
 ERL_NIF_INIT(Elixir.Nif, nif_funcs, &load, NULL, NULL, NULL);
